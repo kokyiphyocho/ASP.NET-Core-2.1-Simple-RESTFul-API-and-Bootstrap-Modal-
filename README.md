@@ -15,16 +15,16 @@ require by the Application. This project will also cover how to consume RESTFul 
 
 #### Project Overview 
 This Project will cover the followings
-- Creating the RESTful Web Api Project.
-- ----------
-- Removing the uncessary views and controller actions.
-- Removing the unnecessary tags from _Layout.cshtml and index.cshtml files.
-- Creating Models for Movie Table and Pagination.
+- Creating the RESTFul Web Api Project.
+- Creating Models for Book Table and Pagination.
 - Creating Custom DBContext and Data Seeding Function using Base64 JSON string.
-- Creating Database using Package Manager Console(Power Shell) or Command Prompt.
-- Changing Route Map.
-- Pagination using pagination model and home controller.
-- Handling multiple models with single view.
+- Creating Database using Package Manager Console(Power Shell).
+- Concept of RESTFul API services and Implementing RESTFul API services .
+- Testing of REStFul API services.
+- Creating API Helper Class to consume API Services.
+- Changing the bootstrap theme from bootswatch website.
+- Bootstrap Pagination Control, Search Box and Modal.
+- Display ASP.NET Partial View in Bootstrap Modal.
 - ----------
 
 
