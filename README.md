@@ -1,6 +1,6 @@
 # ASP.NET Core-2.1 : Simple RESTFul Service with Pagnation and Bootstrap Modal
 This project is to demonstrate how to create a simple RESTFul API service with ASP.NET Core 2.1 to provide the data
-require by the Application. This project will also cover how to consume RESTFul API service using 
+require by the Application. It will also cover how to consume RESTFul API service using ASP.NET MVC Web Application.
 
 #### Architectural Design 
 ![Dsn Project](images/dsn_project.png)
