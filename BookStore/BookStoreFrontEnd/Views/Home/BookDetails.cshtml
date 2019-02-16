@@ -1,0 +1,53 @@
+﻿@model BookStoreFrontEnd.Models.Book
+
+<link rel="stylesheet" href="~/css/home.bookdetails.css" />
+
+<div class="home-bookdetail">
+    <img src="~/images/books/@(Model.Isbn).jpg" />
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Isbn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Isbn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Category)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Edition)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Edition)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PublishYear)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PublishYear)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+        </dl>
+    </div>
+</div>

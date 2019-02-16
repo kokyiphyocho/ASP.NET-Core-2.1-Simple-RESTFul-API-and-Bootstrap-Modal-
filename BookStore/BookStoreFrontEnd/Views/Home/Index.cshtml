@@ -1,0 +1,107 @@
+﻿@model Tuple<IEnumerable<BookStoreFrontEnd.Models.Book>, BookStoreFrontEnd.Models.Pagination>
+
+@*Link to page specific CSS file*@
+@section page_css
+{
+    <link rel="stylesheet" href="~/css/home-index.css" />
+}
+
+<div class="home-index">
+
+    @*Rending Item Container*@
+    <div class="ec-container">
+        @*Loop through List<Book> and render all items*@
+        @foreach (var item in Model.Item1)
+        {
+            <div class="item" data-value="@item.Isbn">
+                <div class="ec-imagecell">
+                    @*If file not found, it will use noimage.jpg*@
+                    <img src="~/images/books/@(item.Isbn).jpg" onerror="this.onerror=null;this.src='images/books/noimage.jpg';" />
+                </div>
+                <div class="ec-pricecell">
+                    $@Html.DisplayFor(modelItem => item.Price)
+                </div>                
+            </div>
+        }
+    </div>
+
+    @*Render Pagination Area*@
+    <nav>
+        @{
+            @*Ensure to render only pagination.PageButtonCount, based on Current Page No.*@
+            var startPage = Model.Item2.PageNo - (Model.Item2.PageButtonCount / 2);
+            var endPage = Model.Item2.PageNo + (Model.Item2.PageButtonCount / 2);
+            endPage -= startPage < 0 ? startPage : 0;
+            startPage -= endPage > Model.Item2.TotalPages ? endPage - Model.Item2.TotalPages : 0;
+
+            @*Limit the start and end page number*@
+            startPage = Math.Max(startPage, 0) + 1;
+            endPage = Math.Min(endPage, Model.Item2.TotalPages);
+        }
+
+        @*Use larger pagination button*@
+        <ul class="pagination pagination-lg">
+
+            @*Render Previous Button*@
+            <li class="page-item @(Model.Item2.PageNo <= 1 ? "disabled" :"")"> @* Disable previous button on 1st Page*@
+                <a class="page-link" asp-route-pageno="@(Model.Item2.PageNo > 1 ? Model.Item2.PageNo - 1 : 1)" aria-label="Previous"> @*Link to Previous Page No.*@
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+
+
+            @*Render page buttons*@
+            @for (var i = startPage; i <= endPage; i++)
+            {
+                <li class="page-item @(i == Model.Item2.PageNo ? "active" : "")">
+                    <a asp-route-pageno="@i" asp-route-keyword="@ViewBag.keyword" class="page-link">@i</a>
+                </li>
+            }
+
+            @*Render Next Button*@
+            <li class="page-item @(Model.Item2.PageNo >= Model.Item2.TotalPages ? "disabled" :"")"> @* Disable next button on last Page*@
+                <a class="page-link" asp-route-pageno="@(Model.Item2.PageNo < Model.Item2.TotalPages ? Model.Item2.PageNo + 1 : Model.Item2.TotalPages)" aria-label="Next"> @*Link to Next Page No.*@
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
+@*Bootstrap modal*@
+<div class="modal fade" id="bookDetailPopup" tabindex="-1" role="dialog" aria-labelledby="bookDetailPopupTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="bookDetailPopupTitle">Book's Detail Information</h4>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent"></div> @*Actual Content will appear in this <div> tag*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".item").click(function () {
+                var isbn = $(this).data('value'); // get the Isbn no. which stored in data-value attribute of the item.
+                $('#modalContent').load('/bookdetails/' + isbn, function () {
+                    $('#bookDetailPopup').modal('show');
+                });
+            });
+        });
+    </script>
+}
+
